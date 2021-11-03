@@ -14,12 +14,12 @@ Complete tasks: 1. Create parametrized test, which will login to yandex mail (ht
 
 7. Create automated script, which waits for user (URL - https://demo.seleniumeasy.com/dynamic-data-loading-demo.html).
 
-8. Create automated script for the following task: a) Go to https://demo.seleniumeasy.com/bootstrap-download-progress-demo.html
-
+8. Create automated script for the following task: 
+a) Go to https://demo.seleniumeasy.com/bootstrap-download-progress-demo.html
 b) Click Download
 c) Refresh page when percentage is >= 50
 
-9. Create automated script for the following task: a) Go to https://demo.seleniumeasy.com/table-sort-search-demo.html
-
+9. Create automated script for the following task: 
+a) Go to https://demo.seleniumeasy.com/table-sort-search-demo.html
 b) Select “10” option in dropdown “Show () entries”
 c) Create method, which returns list of your custom objects (class fields: Name, Position, Office) with age > x and salary <= y for all pages
