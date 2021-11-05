@@ -15,38 +15,39 @@ namespace Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities
 
         public DemoSeleniumEasyPageTableSortSearch GoToDemoSeleniumEasyPageTableSortSearch()
         {
-            _driver.Navigate().GoToUrl(DemoSeleniumEasyPageTableSortSearchURL);
+            driver.Navigate().GoToUrl(DemoSeleniumEasyPageTableSortSearchURL);
 
             return this;
         }
 
-        public const string CorrectOptionFromDropDown = "example_length";
-        public bool SelectCorrectOption()
+        private By CorrectOptionFromDropDown = By.Name("example_length");
+        public bool SelectCorrectOption(string valueParameter)
         {
-            var correctOption = _driver.FindElement(By.Name(CorrectOptionFromDropDown));
+            var correctOption = driver.FindElement(CorrectOptionFromDropDown);
             var selectElement = new SelectElement(correctOption);
 
-            selectElement.SelectByValue("10");
+            selectElement.SelectByValue(valueParameter);
 
             return true; 
         }
 
-        private const string NamesElements = "//tr[@role = 'row']/td[1]";
-        private const string PositionElements = "//tr[@role = 'row']/td[2]";
-        private const string OfficesElements = "//tr[@role = 'row']/td[3]";
-        private const string AgesElements = "//tr[@role = 'row']/td[4]";
-        private const string SalariesElements = "//tr[@role = 'row']/td[6]";
+        private By NamesElements = By.XPath("//tr[@role = 'row']/td[1]");
+        private By PositionElements = By.XPath("//tr[@role = 'row']/td[2]");
+        private By OfficesElements = By.XPath("//tr[@role = 'row']/td[3]");
+        private By AgesElements = By.XPath("//tr[@role = 'row']/td[4]");
+        private By SalariesElements = By.XPath("//tr[@role = 'row']/td[6]");
+
+        private IList<IWebElement> SearchRowNames => driver.FindElements(NamesElements).ToList();
+        private IList<IWebElement> SearchRowPositions => driver.FindElements(PositionElements).ToList();
+        private IList<IWebElement> SearchRowOffices => driver.FindElements(OfficesElements).ToList();
+        private IList<IWebElement> SearchRowAges => driver.FindElements(AgesElements);
+        private IList<IWebElement> SearchRowSalaries => driver.FindElements(SalariesElements);
+
 
         public List<CustomObject> GetCustomObjects(int x, int y)
         {
-            var names = _driver.FindElements(By.XPath(NamesElements)).ToList();
-            var positions = _driver.FindElements(By.XPath(PositionElements)).ToList();
-            var offices = _driver.FindElements(By.XPath(OfficesElements)).ToList();
-            var ages = _driver.FindElements(By.XPath(AgesElements));
-            var salaries = _driver.FindElements(By.XPath(SalariesElements));
-
-            var convertedAges = ages.Select(a => int.Parse(a.Text)).ToList();
-            var convertedSalaries = salaries.Select(s => int.Parse(s.Text.Trim('$', '/', 'y').Replace(",", ""))).ToList();
+            var convertedAges = SearchRowAges.Select(a => int.Parse(a.Text)).ToList();
+            var convertedSalaries = SearchRowSalaries.Select(s => int.Parse(s.Text.Trim('$', '/', 'y').Replace(",", ""))).ToList();
 
             var resultList = new List<CustomObject>();
 
@@ -56,9 +57,9 @@ namespace Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities
                 {
                     resultList.Add(new CustomObject
                     {
-                        Name = names.ElementAt(i).Text,
-                        Position = positions.ElementAt(i).Text,
-                        Office = offices.ElementAt(i).Text
+                        Name = SearchRowNames.ElementAt(i).Text,
+                        Position = SearchRowPositions.ElementAt(i).Text,
+                        Office = SearchRowOffices.ElementAt(i).Text
                     });
                 }
             }

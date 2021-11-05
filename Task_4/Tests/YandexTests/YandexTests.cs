@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Task_4.Page_Object_Entities;
 using Task_4.Tests;
 
 namespace Task_4
@@ -11,6 +12,8 @@ namespace Task_4
         [TestCase(TestConstants.LoginForSecondTest, TestConstants.PasswordForSecondTest)]
         public void YandexLoginsTest(string loginData, string passwordData)
         {
+            var _yandexHomePage = new YandexHomePage(driver);
+
             _yandexHomePage?
                 .GoToYandexHomePage()
                 .CustomClickOnEnterForm()
@@ -24,8 +27,8 @@ namespace Task_4
              * an application or other applications that might be running on a computer system.
              */
 
-            Assert.IsTrue(_yandexHomePage?.YandexCorrectLoginByUrl(), $"URL is incorrect - test received {_driver?.Url}");
-            Assert.IsTrue(_yandexHomePage?.YandexCorrectLoginByTitle(), $"Title is incorrect - test received {_driver?.Title}");
+            Assert.IsTrue(_yandexHomePage?.YandexCorrectLoginByUrl(), $"URL is incorrect - test received {driver?.Url}");
+            Assert.IsTrue(_yandexHomePage?.YandexCorrectLoginByTitle(), $"Title is incorrect - test received {driver?.Title}");
         }
     }
 }

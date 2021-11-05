@@ -7,21 +7,21 @@ namespace Task_4.Page_Object_Entities
 {
     public class BasePage
     {
-        protected IWebDriver _driver;
-        protected BasePage(IWebDriver _driver)
+        protected IWebDriver driver;
+        protected BasePage(IWebDriver driver)
         {
-            this._driver = _driver;
+            this.driver = driver;
         }
         
-        public bool DriverWaitElementIsDisplayed()
+        public bool IsDisplayed(IWebDriver driver, By by, int timeoutInSeconds)
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
 
             var element = wait.Until(condition =>
             {
                 try
                 {
-                    var elementToBeDisplayed = _driver.FindElement(By.CssSelector(".username__first-letter"));
+                    var elementToBeDisplayed = driver.FindElement(by);
                     return elementToBeDisplayed.Displayed;
                 }
 
@@ -39,15 +39,14 @@ namespace Task_4.Page_Object_Entities
             return true;
         }
 
-        public bool DriverWaitElementIsSelected()
+        public bool IsSelected(IWebDriver driver, By by, int timeoutInSeconds)
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
             var element = wait.Until(condition =>
             {
                 try
                 {
-                    var elementToBeSelected = _driver.FindElement(By.XPath("//select[@id = 'multi-select']/option"));
+                    var elementToBeSelected = driver.FindElement(by);
                     return elementToBeSelected.Selected;
                 }
 
@@ -65,36 +64,29 @@ namespace Task_4.Page_Object_Entities
             return true;
         }
 
-        public void IsAlertVisible()
+        public bool IsAlertVisible(IWebDriver driver, int timeoutInSeconds)
         {
-            WebDriverWait webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));
-            webDriverWait.Until(ExpectedConditions.AlertIsPresent());
-        }
-
-        public bool WaitForUser()
-        {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
-
-            var element = wait.Until(condition =>
+            try
             {
-                try
+                if (timeoutInSeconds > 0)
                 {
-                    var elementToBeVisible = _driver.FindElement(By.XPath("//div[@id = 'loading']/img"));
-                    return elementToBeVisible.Displayed;
+                    WebDriverWait webDriverWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                    webDriverWait.Until(ExpectedConditions.AlertIsPresent());
                 }
+            }
 
-                catch (StaleElementReferenceException)
-                {
-                    return false;
-                }
+            catch (StaleElementReferenceException)
+            {
+                return false;
+            }
 
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            });
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
 
             return true;
-        }
+        }    
     }
 }
+

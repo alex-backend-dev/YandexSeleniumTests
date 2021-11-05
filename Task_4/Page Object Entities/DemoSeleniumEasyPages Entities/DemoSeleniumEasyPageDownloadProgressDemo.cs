@@ -11,14 +11,14 @@ namespace Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities
         private const string DemoSeleniumEasyPageDownloadProgressDemoURL = "http://demo.seleniumeasy.com/bootstrap-download-progress-demo.html";
         public DemoSeleniumEasyPageDownloadProgressDemo GoToDemoSeleniumEasyPageDownloadProgressDemo()
         {
-            _driver.Navigate().GoToUrl(DemoSeleniumEasyPageDownloadProgressDemoURL);
+            driver.Navigate().GoToUrl(DemoSeleniumEasyPageDownloadProgressDemoURL);
 
             return this;
         }
 
-        private const string DownloadButton = "//button[@id = 'cricle-btn']";
+        private By DownloadButton = By.XPath("//button[@id = 'cricle-btn']");
 
-        private IWebElement SearchDownloadButton => _driver.FindElement(By.XPath(DownloadButton));
+        private IWebElement SearchDownloadButton => driver.FindElement(DownloadButton);
 
         public DemoSeleniumEasyPageDownloadProgressDemo ClickOnDownloadButton()
         {
@@ -26,9 +26,9 @@ namespace Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities
             return this;
         }
 
-        private const string DownloadButtonPercentage = "//div[@class = 'percenttext']";
+        private By DownloadButtonPercentage = By.XPath("//div[@class = 'percenttext']");
 
-        private IWebElement SearchDownloadButtonPercentage => _driver.FindElement(By.XPath(DownloadButtonPercentage));
+        private IWebElement SearchDownloadButtonPercentage => driver.FindElement(DownloadButtonPercentage);
 
         public bool RefreshPage()
         {
@@ -38,7 +38,7 @@ namespace Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities
 
                 if (text >= 50)
                 {
-                    _driver.Navigate().Refresh();
+                    driver.Navigate().Refresh();
                     return true;
                 }
             }

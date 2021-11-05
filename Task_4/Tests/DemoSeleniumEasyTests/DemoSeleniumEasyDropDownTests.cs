@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using System.Threading;
+using Task_4.Page_Object_Entities;
 
 namespace Task_4.Tests
 {
@@ -9,6 +9,8 @@ namespace Task_4.Tests
         [Test]
         public void DemoSeleniumEasyDropDownTest()
         {
+            var _demoSeleniumEasyPage = new DemoSeleniumEasyPageDropDownDemo(driver);
+
             _demoSeleniumEasyPage?.GoToDemoSeleniumEasyPage();
 
             Assert.IsTrue(_demoSeleniumEasyPage?.ClickOnThreeOptions(), "No click on three options");

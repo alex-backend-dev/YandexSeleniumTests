@@ -1,13 +1,18 @@
 ﻿using NUnit.Framework;
+using Task_4.Page_Object_Entities;
 
 namespace Task_4.Tests
 {
     [TestFixture]
     public class DemoSeleniumEasyPageAlertsTests : BaseTest
     {
+        private DemoSeleniumEasyPageAlerts? _demoSeleniumEasyPageAlerts;
+
         [Test]
         public void DemoSeleniumEasyJavaScriptConfirmBoxCancelClickTest()
         {
+            _demoSeleniumEasyPageAlerts = new DemoSeleniumEasyPageAlerts(driver);
+
             _demoSeleniumEasyPageAlerts?
                 .GoToDemoSeleniumEasyPageJavaScripAlertBoxes()
                 .AlertClickCancelOnJavaScriptConfirmBox();
@@ -18,6 +23,8 @@ namespace Task_4.Tests
         [Test]
         public void DemoSeleniumEasyJavaScriptConfirmBoxOkClickTest()
         {
+            _demoSeleniumEasyPageAlerts = new DemoSeleniumEasyPageAlerts(driver);
+
             _demoSeleniumEasyPageAlerts?
                 .GoToDemoSeleniumEasyPageJavaScripAlertBoxes()
                 .AlertClickOkOnJavaScriptConfirmBox();
@@ -28,6 +35,8 @@ namespace Task_4.Tests
         [Test]
         public void DemoSeleniumEasyJavaScriptAlertBoxOkClickTest()
         {
+            _demoSeleniumEasyPageAlerts = new DemoSeleniumEasyPageAlerts(driver);
+
             _demoSeleniumEasyPageAlerts?.GoToDemoSeleniumEasyPageJavaScripAlertBoxes();
 
             Assert.IsTrue(_demoSeleniumEasyPageAlerts?.AlertClickOkOnJavaScriptAlertBox(), "No click on Alert");              

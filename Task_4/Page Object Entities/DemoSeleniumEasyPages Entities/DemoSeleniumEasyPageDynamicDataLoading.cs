@@ -9,22 +9,27 @@ namespace Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities
         }
 
         private const string DemoSeleniumEasyPageDynamicDataLoadingURL = "http://demo.seleniumeasy.com/dynamic-data-loading-demo.html";
-
+        private By WaitForImg = By.XPath("//div[@id = 'loading']/img");
         public DemoSeleniumEasyPageDynamicDataLoading GoToDemoSeleniumEasyPageDynamicDataLoading()
         {
-            _driver.Navigate().GoToUrl(DemoSeleniumEasyPageDynamicDataLoadingURL);
+            driver.Navigate().GoToUrl(DemoSeleniumEasyPageDynamicDataLoadingURL);
 
             return this;
         }
 
-        private const string GetNewUserButton = "//button[@id = 'save']";
+        private By GetNewUserButton = By.XPath("//button[@id = 'save']");
 
-        private IWebElement SearchGetNewUserButton => _driver.FindElement(By.XPath(GetNewUserButton));
+        private IWebElement SearchGetNewUserButton => driver.FindElement(GetNewUserButton);
 
         public DemoSeleniumEasyPageDynamicDataLoading ClickOnGetNewUserButton()
         {
             SearchGetNewUserButton.Click();
             return this;
+        }
+
+        public bool WaitForUser()
+        {
+            return IsDisplayed(driver, WaitForImg, 5);
         }
     }
 }

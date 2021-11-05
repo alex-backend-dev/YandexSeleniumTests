@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities;
 
 namespace Task_4.Tests.DemoSeleniumEasyTests
 {
@@ -8,6 +9,8 @@ namespace Task_4.Tests.DemoSeleniumEasyTests
         [Test]
         public void DownloadProgressDemoTest()
         {
+            var _demoSeleniumEasyPageDownloadProgressDemo = new DemoSeleniumEasyPageDownloadProgressDemo(driver);
+
             _demoSeleniumEasyPageDownloadProgressDemo?
                 .GoToDemoSeleniumEasyPageDownloadProgressDemo()
                 .ClickOnDownloadButton();

@@ -4,9 +4,10 @@ namespace Task_4.Page_Object_Entities
 {
     public class YandexHomePage : BasePage
     {
-        private const string EnterFormXpath = "//div[contains(text(),'Войти')]";
-        private const string LoginFormSelector = "#passp-field-login";
-        private const string PasswordFormSelector = "#passp-field-passwd";
+        private By EnterFormXpath = By.XPath("//div[contains(text(),'Войти')]");
+        private By LoginFormSelector = By.CssSelector("#passp-field-login");
+        private By PasswordFormSelector = By.CssSelector("#passp-field-passwd");
+        private By WaitForLoginName = By.CssSelector(".username__first-letter");
 
         private const string YandexByHomePageUrl = "https://yandex.by/";
         private const string YandexHomePageTitle = "Яндекс";
@@ -15,13 +16,13 @@ namespace Task_4.Page_Object_Entities
         {
         }
 
-        private IWebElement SearchResultEnter => _driver.FindElement(By.XPath(EnterFormXpath));
-        private IWebElement SearchResultLogin => _driver.FindElement(By.CssSelector(LoginFormSelector));
-        private IWebElement SearchResultPassword => _driver.FindElement(By.CssSelector(PasswordFormSelector));
+        private IWebElement SearchResultEnter => driver.FindElement(EnterFormXpath);
+        private IWebElement SearchResultLogin => driver.FindElement(LoginFormSelector);
+        private IWebElement SearchResultPassword => driver.FindElement(PasswordFormSelector);
 
         public YandexHomePage GoToYandexHomePage()
         {
-            _driver.Navigate().GoToUrl(YandexByHomePageUrl);
+            driver.Navigate().GoToUrl(YandexByHomePageUrl);
 
             return this;
         }
@@ -44,13 +45,13 @@ namespace Task_4.Page_Object_Entities
         {
             SearchResultPassword.SendKeys(passwordData);
             SearchResultPassword.SendKeys(Keys.Enter);
-            DriverWaitElementIsDisplayed();
+            IsDisplayed(driver, WaitForLoginName, 4);
 
             return this;
         }
 
-        public bool YandexCorrectLoginByUrl() => _driver.Url.Contains(YandexByHomePageUrl);
+        public bool YandexCorrectLoginByUrl() => driver.Url.Contains(YandexByHomePageUrl);
 
-        public bool YandexCorrectLoginByTitle() => _driver.Title.Contains(YandexHomePageTitle);
+        public bool YandexCorrectLoginByTitle() => driver.Title.Contains(YandexHomePageTitle);
     }
 }

@@ -10,25 +10,25 @@ namespace Task_4.Page_Object_Entities
 
         private const string DemoSeleniumEasyPageJavaScriptAlertBoxURL = "http://demo.seleniumeasy.com/javascript-alert-box-demo.html";
 
-        private const string ClickMeButtonJavaScriptConfirmBox = "//button[@onclick = 'myConfirmFunction()']";
-        private const string ValidationElementAfterClickingOnButton = "#confirm-demo";
-        private const string ClickMeButtonJavaScriptAlertBox = "//button[@onclick = 'myAlertFunction()']";
+        private By ClickMeButtonJavaScriptConfirmBox = By.XPath("//button[@onclick = 'myConfirmFunction()']");
+        private By ValidationElementAfterClickingOnButton = By.CssSelector("#confirm-demo");
+        private By ClickMeButtonJavaScriptAlertBox = By.XPath("//button[@onclick = 'myAlertFunction()']");
 
         public DemoSeleniumEasyPageAlerts GoToDemoSeleniumEasyPageJavaScripAlertBoxes()
         {
-            _driver.Navigate().GoToUrl(DemoSeleniumEasyPageJavaScriptAlertBoxURL);
+            driver.Navigate().GoToUrl(DemoSeleniumEasyPageJavaScriptAlertBoxURL);
 
             return this;
         }
 
-        private IWebElement SearchClickMeButtonJavaScriptConfirmBox => _driver.FindElement(By.XPath(ClickMeButtonJavaScriptConfirmBox));
+        private IWebElement SearchClickMeButtonJavaScriptConfirmBox => driver.FindElement(ClickMeButtonJavaScriptConfirmBox);
 
         public bool AlertClickCancelOnJavaScriptConfirmBox()
         {
             SearchClickMeButtonJavaScriptConfirmBox.Click();
-            IsAlertVisible();
+            IsAlertVisible(driver, 4);
 
-            IAlert alert = _driver.SwitchTo().Alert();
+            IAlert alert = driver.SwitchTo().Alert();
             string text = alert.Text;
             alert.Dismiss();
 
@@ -38,29 +38,29 @@ namespace Task_4.Page_Object_Entities
         public bool AlertClickOkOnJavaScriptConfirmBox()
         {
             SearchClickMeButtonJavaScriptConfirmBox.Click();
-            IsAlertVisible();
+            IsAlertVisible(driver, 4);
 
-            IAlert alert = _driver.SwitchTo().Alert();
+            IAlert alert = driver.SwitchTo().Alert();
             string text = alert.Text;
             alert.Accept();
 
             return true;
         }
 
-        private IWebElement SearchValidationElementAfterClicking => _driver.FindElement(By.CssSelector(ValidationElementAfterClickingOnButton));
+        private IWebElement SearchValidationElementAfterClicking => driver.FindElement(ValidationElementAfterClickingOnButton);
 
         public string CurrentTextAfterClickingAlert()
         {
             return SearchValidationElementAfterClicking.Text;
         }
 
-        private IWebElement SearchClickOnMeButtonJavaScriptAlertBox => _driver.FindElement(By.XPath(ClickMeButtonJavaScriptAlertBox));
+        private IWebElement SearchClickOnMeButtonJavaScriptAlertBox => driver.FindElement(ClickMeButtonJavaScriptAlertBox);
         public bool AlertClickOkOnJavaScriptAlertBox()
         {
             SearchClickOnMeButtonJavaScriptAlertBox.Click();
-            IsAlertVisible();
+            IsAlertVisible(driver, 4);
 
-            IAlert alert = _driver.SwitchTo().Alert();
+            IAlert alert = driver.SwitchTo().Alert();
             string text = alert.Text;
             alert.Accept();
 

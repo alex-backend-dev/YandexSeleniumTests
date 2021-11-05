@@ -7,17 +7,17 @@ namespace Task_4.Page_Object_Entities
     public class DemoSeleniumEasyPageDropDownDemo : BasePage
     {
         private const string DemoSeleniumEasyPageSelectDropDownURL = "http://demo.seleniumeasy.com/basic-select-dropdown-demo.html";
-        private const string SelectElements = "#multi-select";
+        private By SelectElements = By.CssSelector("#multi-select");
 
         public DemoSeleniumEasyPageDropDownDemo(IWebDriver _driver): base(_driver)
         {
         }
 
-        private IWebElement SearchSelectElem => _driver.FindElement(By.CssSelector(SelectElements));
-
+        private IWebElement SearchSelectElem => driver.FindElement(SelectElements);
+        private By SelectedOptions = By.XPath("//select[@id = 'multi-select']/option");
         public DemoSeleniumEasyPageDropDownDemo GoToDemoSeleniumEasyPage()
         {
-            _driver.Navigate().GoToUrl(DemoSeleniumEasyPageSelectDropDownURL);
+            driver.Navigate().GoToUrl(DemoSeleniumEasyPageSelectDropDownURL);
 
             return this;
         }
@@ -40,7 +40,7 @@ namespace Task_4.Page_Object_Entities
                 }
             }
 
-            DriverWaitElementIsSelected();
+            IsSelected(driver, SelectedOptions, 5);
             return true;
         }
     }
