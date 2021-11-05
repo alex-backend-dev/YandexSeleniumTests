@@ -4,21 +4,22 @@ namespace Task_4.Page_Object_Entities
 {
     public class YandexHomePage : BasePage
     {
+        private const string YandexByHomePageUrl = "https://yandex.by/";
+        private const string YandexHomePageTitle = "Яндекс";
+
         private By EnterFormXpath = By.XPath("//div[contains(text(),'Войти')]");
         private By LoginFormSelector = By.CssSelector("#passp-field-login");
         private By PasswordFormSelector = By.CssSelector("#passp-field-passwd");
         private By WaitForLoginName = By.CssSelector(".username__first-letter");
 
-        private const string YandexByHomePageUrl = "https://yandex.by/";
-        private const string YandexHomePageTitle = "Яндекс";
+        private IWebElement SearchResultEnter => driver.FindElement(EnterFormXpath);
+        private IWebElement SearchResultLogin => driver.FindElement(LoginFormSelector);
+        private IWebElement SearchResultPassword => driver.FindElement(PasswordFormSelector);
+
 
         public YandexHomePage(IWebDriver _driver): base(_driver)
         {
         }
-
-        private IWebElement SearchResultEnter => driver.FindElement(EnterFormXpath);
-        private IWebElement SearchResultLogin => driver.FindElement(LoginFormSelector);
-        private IWebElement SearchResultPassword => driver.FindElement(PasswordFormSelector);
 
         public YandexHomePage GoToYandexHomePage()
         {

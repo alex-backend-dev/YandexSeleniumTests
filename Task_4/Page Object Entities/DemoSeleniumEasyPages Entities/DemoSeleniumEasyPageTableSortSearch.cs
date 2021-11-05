@@ -7,11 +7,25 @@ namespace Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities
 {
     public class DemoSeleniumEasyPageTableSortSearch : BasePage
     {
+        private const string DemoSeleniumEasyPageTableSortSearchURL = "http://demo.seleniumeasy.com/table-sort-search-demo.html";
+
+        private By CorrectOptionFromDropDown = By.Name("example_length");
+        private By NamesElements = By.XPath("//tr[@role = 'row']/td[1]");
+        private By PositionElements = By.XPath("//tr[@role = 'row']/td[2]");
+        private By OfficesElements = By.XPath("//tr[@role = 'row']/td[3]");
+        private By AgesElements = By.XPath("//tr[@role = 'row']/td[4]");
+        private By SalariesElements = By.XPath("//tr[@role = 'row']/td[6]");
+
+        private IWebElement correctOption => driver.FindElement(CorrectOptionFromDropDown);
+        private IList<IWebElement> SearchRowNames => driver.FindElements(NamesElements).ToList();
+        private IList<IWebElement> SearchRowPositions => driver.FindElements(PositionElements).ToList();
+        private IList<IWebElement> SearchRowOffices => driver.FindElements(OfficesElements).ToList();
+        private IList<IWebElement> SearchRowAges => driver.FindElements(AgesElements);
+        private IList<IWebElement> SearchRowSalaries => driver.FindElements(SalariesElements);
+
         public DemoSeleniumEasyPageTableSortSearch(IWebDriver _driver) : base(_driver)
         {
         }
-
-        public const string DemoSeleniumEasyPageTableSortSearchURL = "http://demo.seleniumeasy.com/table-sort-search-demo.html";
 
         public DemoSeleniumEasyPageTableSortSearch GoToDemoSeleniumEasyPageTableSortSearch()
         {
@@ -20,29 +34,20 @@ namespace Task_4.Page_Object_Entities.DemoSeleniumEasyPages_Entities
             return this;
         }
 
-        private By CorrectOptionFromDropDown = By.Name("example_length");
         public bool SelectCorrectOption(string valueParameter)
         {
-            var correctOption = driver.FindElement(CorrectOptionFromDropDown);
-            var selectElement = new SelectElement(correctOption);
+            try
+            {
+                var selectElement = new SelectElement(correctOption);
+                selectElement.SelectByValue(valueParameter);
+                return true;
+            }
 
-            selectElement.SelectByValue(valueParameter);
-
-            return true; 
+            catch(NoSuchElementException)
+            {
+                return false;
+            }
         }
-
-        private By NamesElements = By.XPath("//tr[@role = 'row']/td[1]");
-        private By PositionElements = By.XPath("//tr[@role = 'row']/td[2]");
-        private By OfficesElements = By.XPath("//tr[@role = 'row']/td[3]");
-        private By AgesElements = By.XPath("//tr[@role = 'row']/td[4]");
-        private By SalariesElements = By.XPath("//tr[@role = 'row']/td[6]");
-
-        private IList<IWebElement> SearchRowNames => driver.FindElements(NamesElements).ToList();
-        private IList<IWebElement> SearchRowPositions => driver.FindElements(PositionElements).ToList();
-        private IList<IWebElement> SearchRowOffices => driver.FindElements(OfficesElements).ToList();
-        private IList<IWebElement> SearchRowAges => driver.FindElements(AgesElements);
-        private IList<IWebElement> SearchRowSalaries => driver.FindElements(SalariesElements);
-
 
         public List<CustomObject> GetCustomObjects(int x, int y)
         {

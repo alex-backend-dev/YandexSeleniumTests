@@ -15,7 +15,7 @@ namespace Task_4.Tests.DemoSeleniumEasyTests
                 .GoToDemoSeleniumEasyPageDynamicDataLoading()
                 .ClickOnGetNewUserButton();
 
-            Assert.IsTrue(_demoSeleniumEasyPageDynamicDataLoading?.WaitForUser(), "We are not waited for a user");
+            Assert.IsTrue(_demoSeleniumEasyPageDynamicDataLoading?.WaitForUser(), "We didn't wait for the user");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Threading;
 using Task_4.Page_Object_Entities;
 
 namespace Task_4.Tests
@@ -17,7 +18,7 @@ namespace Task_4.Tests
                 .GoToDemoSeleniumEasyPageJavaScripAlertBoxes()
                 .AlertClickCancelOnJavaScriptConfirmBox();
 
-            Assert.AreEqual("You pressed Cancel!", _demoSeleniumEasyPageAlerts?.CurrentTextAfterClickingAlert(), "You are not pressed Cancel!");
+            Assert.AreEqual("You pressed Cancel!", _demoSeleniumEasyPageAlerts?.SearchValidationElementAfterClicking.Text, "You are not pressed Cancel!");
         }
 
         [Test]
@@ -29,7 +30,7 @@ namespace Task_4.Tests
                 .GoToDemoSeleniumEasyPageJavaScripAlertBoxes()
                 .AlertClickOkOnJavaScriptConfirmBox();
 
-            Assert.AreEqual("You pressed OK!", _demoSeleniumEasyPageAlerts?.CurrentTextAfterClickingAlert(), "You are not pressed OK");
+            Assert.AreEqual("You pressed OK!", _demoSeleniumEasyPageAlerts?.SearchValidationElementAfterClicking.Text, "You are not pressed OK");
         }
 
         [Test]
@@ -37,9 +38,10 @@ namespace Task_4.Tests
         {
             _demoSeleniumEasyPageAlerts = new DemoSeleniumEasyPageAlerts(driver);
 
-            _demoSeleniumEasyPageAlerts?.GoToDemoSeleniumEasyPageJavaScripAlertBoxes();
+            _demoSeleniumEasyPageAlerts?
+                .GoToDemoSeleniumEasyPageJavaScripAlertBoxes();
 
-            Assert.IsTrue(_demoSeleniumEasyPageAlerts?.AlertClickOkOnJavaScriptAlertBox(), "No click on Alert");              
+            Assert.AreEqual("I am an alert box!", _demoSeleniumEasyPageAlerts?.AlertClickOkOnJavaScriptAlertBox(), "Alert didn't appear");              
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Task_4.Tests
 {
     public class BaseTest
     {
-        protected IWebDriver? driver;
+        protected IWebDriver driver;
 
         [SetUp]
         public void SetupEntities()
