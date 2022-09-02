@@ -1,6 +1,8 @@
 # YandexAndSeleniumEasyTests
 
-Complete tasks: 1. Create parametrized test, which will login to yandex mail (https://mail.yandex.com/) with at least 2 different credentials (you can use account from task 30 + create additional one).
+Complete tasks: 
+
+1. Create parametrized test, which will login to yandex mail (https://mail.yandex.com/) with at least 2 different credentials (you can use account from task 30 + create additional one).
 
 2. Add implicit waiter for WebDriver.
 
