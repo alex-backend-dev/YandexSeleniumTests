@@ -1,4 +1,4 @@
-# YandexAndSeleniumEasyTests
+# Yandex Tests 
 
 Complete tasks: 
 
